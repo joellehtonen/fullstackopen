@@ -1,14 +1,15 @@
 ```mermaid
 sequenceDiagram
     participant browser
-    participant server
+    participant 
+    
+    Note left of browser: The user clicks "save" button
 
     browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
     activate server
     server-->>browser: HTTP status code 302
     deactivate server
 
-    Note right of browser: The user clicks "save" button
     Note right of server: The server asks for a reload (new GET request)
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
