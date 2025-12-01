@@ -10,7 +10,7 @@ sequenceDiagram
     server-->>browser: HTTP status code 302
     deactivate server
 
-    Note right of server: The server asks for a reload (new GET request).
+    Note right of server: The server handles the request and asks for a reload (new GET request).
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
