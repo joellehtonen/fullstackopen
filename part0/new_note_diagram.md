@@ -3,14 +3,14 @@ sequenceDiagram
     participant browser
     participant server
     
-    Note left of browser: The user clicks "save" button
+    Note left of browser: The user clicks "save" button.
 
     browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
     activate server
     server-->>browser: HTTP status code 302
     deactivate server
 
-    Note right of server: The server asks for a reload (new GET request)
+    Note right of server: The server asks for a reload (new GET request).
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
@@ -31,4 +31,6 @@ sequenceDiagram
     activate server
     server-->>browser: JSON file
     deactivate server
+
+    Note right of browser: The website is re-rendered.
 ```
