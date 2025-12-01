@@ -1,7 +1,7 @@
 ```mermaid
 sequenceDiagram
     participant browser
-    participant 
+    participant server
     
     Note left of browser: The user clicks "save" button
 
