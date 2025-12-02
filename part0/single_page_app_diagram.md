@@ -3,9 +3,9 @@ sequenceDiagram
 participant browser
 participant server
 browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa
-server activate
+activate server
 server-->>browser: Server sends HTML document with Javascript
-server deactivate
+deactivate server
 browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
 activate server
 server-->>browser: CSS file
