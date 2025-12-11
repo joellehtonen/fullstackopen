@@ -22,6 +22,25 @@ const Positive = ({ good, all }) => {
     )
 }
 
+const Statistics = ({ all, good, neutral, bad, score }) => {
+    if (all < 1)
+        return (
+            <h2>No feedback given</h2>
+    )
+    return (
+        <>
+        <h2>Statistics</h2>
+        <p>Good: {good}</p>
+        <p>Neutral: {neutral}</p>
+        <p>Bad: {bad}</p>
+        <p>All: {all}</p>
+        <Average score={score} all={all} />
+        <br /> <br />
+        <Positive good={good} all={all} />
+        </>
+    )
+}
+
 const App = () => {
     const [good, setGood] = useState(0)
     const [neutral, setNeutral] = useState(0)
@@ -59,14 +78,7 @@ const App = () => {
             <button onClick={handleNeutral}>NEUTRAL</button>
             <button onClick={handleBad}>BAD</button>
 
-            <h2>Statistics</h2>
-            <p>Good: {good}</p>
-            <p>Neutral: {neutral}</p>
-            <p>Bad: {bad}</p>
-            <p>All: {all}</p>
-            <Average score={score} all={all} />
-            <br /> <br />
-            <Positive good={good} all={all} />
+            <Statistics all={all} good={good} neutral={neutral} bad={bad} score={score} />
         </div>
     )
 }
