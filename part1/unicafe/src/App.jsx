@@ -1,24 +1,8 @@
 import { useState } from 'react'
 
-const Average = ({ score, all }) => {
-    const average = score / all
-    if (all < 1)
-        return (
-            'Average: 0' 
-    )
+const StatisticLine = (props) => {
     return (
-        'Average: ' + average
-    )
-}
-
-const Positive = ({ good, all }) => {
-    const positive = (good / all) * 100
-    if (all < 1)
-        return (
-            'Positive: '
-    )
-    return (
-        'Positive: ' + positive + '%'
+        <p>{props.text}: {props.value}</p>
     )
 }
 
@@ -27,17 +11,24 @@ const Statistics = ({ all, good, neutral, bad, score }) => {
         return (
             <h2>No feedback given</h2>
     )
+    const average = score / all
+    const positives = good / all * 100
     return (
         <>
         <h2>Statistics</h2>
-        <p>Good: {good}</p>
-        <p>Neutral: {neutral}</p>
-        <p>Bad: {bad}</p>
-        <p>All: {all}</p>
-        <Average score={score} all={all} />
-        <br /> <br />
-        <Positive good={good} all={all} />
+        <StatisticLine text='Good' value={good} />
+        <StatisticLine text='Neutral' value={neutral} />
+        <StatisticLine text='Bad' value={bad} />
+        <StatisticLine text='All' value={all} />
+        <StatisticLine text='Average' value={average} />
+        <StatisticLine text='Positives' value={positives} />
         </>
+    )
+}
+
+const Button = ({ text, onClick }) => {
+    return (
+        <button onClick={onClick}>{text}</button>
     )
 }
 
@@ -74,9 +65,9 @@ const App = () => {
     return (
         <div>
             <h1>Give feedback</h1>
-            <button onClick={handleGood}>GOOD</button>
-            <button onClick={handleNeutral}>NEUTRAL</button>
-            <button onClick={handleBad}>BAD</button>
+            <Button onClick={handleGood} text='GOOD' />
+            <Button onClick={handleNeutral} text='NEUTRAL' />
+            <Button onClick={handleBad} text='BAD' />
 
             <Statistics all={all} good={good} neutral={neutral} bad={bad} score={score} />
         </div>
