@@ -1,4 +1,8 @@
-
+const Note = ({ note }) => {
+    return (
+        <li>{note.content}</li>
+    )
+}
 
 const App = (props) => {
     const { notes } = props
@@ -7,10 +11,9 @@ const App = (props) => {
         <div>
             <h1>Notes</h1>
             <ul>
-                {notes.map(notes => 
-                <li>
-                    {notes.content}
-                </li>)}
+                {notes.map(note => 
+                    <Note key={note.key} note={note} />
+                )}
             </ul>
         </div>
     )
