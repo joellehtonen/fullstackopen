@@ -5,7 +5,6 @@ const Header = ({ name }) => {
 }
 
 const Content = ({ parts }) => {
-    console.log('parts', parts)
     return (
     <ul>
         {parts.map(part =>
@@ -22,20 +21,30 @@ const Part = ({ name, exercises }) => {
     )
 }
 
-// const Total = (props) => {
-//     return (
-//         <p>
-//             Number of exercises {props.course.parts[0].exercises + props.course.parts[1].exercises + props.course.parts[2].exercises}
-//         </p>
-//     )
-// }
+const Total = ({ parts }) => {
+    // console.log('parts', parts)
+
+    const result = parts.reduce((acc, cur) => {
+        // console.log('acc', acc)
+        // console.log('cur', cur)
+        return acc + cur.exercises
+    }, 0)
+
+    console.log('result', result)
+
+    return (
+        <p>
+            Number of exercises {result}
+        </p>
+    )
+}
 
 const Course = ({ course }) => {
     return (
         <div>
             <Header name={course.name} />
             <Content parts={course.parts} />
-            {/* <Total course={course} /> */}
+            <Total parts={course.parts} />
         </div>
     )
 }
