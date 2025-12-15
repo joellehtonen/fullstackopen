@@ -9,14 +9,14 @@ const Content = ({ parts }) => {
     return (
     <ul>
         {parts.map(part =>
-            <Part name={part.name} exercises={part.exercises} id={part.id}/>)}
+            <Part name={part.name} exercises={part.exercises} key={part.id}/>)}
     </ul>
     )
 }
 
-const Part = ({ name, exercises, id }) => {
+const Part = ({ name, exercises }) => {
     return (
-        <li key={id}>
+        <li>
             {name} {exercises}
         </li>
     )
