@@ -1,15 +1,15 @@
 const Header = ({ name }) => {
     return (
-        <h1>{name}</h1>
+        <h2>{name}</h2>
     )
 }
 
 const Content = ({ parts }) => {
     return (
-    <ul>
-        {parts.map(part =>
-            <Part name={part.name} exercises={part.exercises} key={part.id}/>)}
-    </ul>
+        <ul>
+            {parts.map(part =>
+                <Part key={part.id} name={part.name} exercises={part.exercises}/>)}
+        </ul>
     )
 }
 
@@ -30,7 +30,7 @@ const Total = ({ parts }) => {
         return acc + cur.exercises
     }, 0)
 
-    console.log('result', result)
+    // console.log('result', result)
 
     return (
         <p>
@@ -39,14 +39,17 @@ const Total = ({ parts }) => {
     )
 }
 
-const Course = ({ course }) => {
+const Course = ({ courses }) => {
+    console.log('courses', courses)
     return (
         <div>
-            <Header name={course.name} />
-            <Content parts={course.parts} />
-            <Total parts={course.parts} />
+            {courses.map(course => (
+                <div key={course.id}>
+                    <Header name={course.name} />
+                    <Content parts={course.parts} />
+                    <Total parts={course.parts} />
+                </div>))}
         </div>
-    )
-}
+    )}
 
 export default Course
