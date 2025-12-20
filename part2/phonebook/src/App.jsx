@@ -3,10 +3,15 @@ import { useState } from 'react'
 
 const App = () => {
     const [persons, setPersons] = useState([
-        { name: 'Joel Lehtonen', number: '' }
+        { name: 'Joel Lehtonen', number: '040-5656473' },
+        { name: 'Ada Lovelace', number: '39-44-5323523' },
+        { name: 'Dan Abramov', number: '12-43-234345' },
+        { name: 'Mary Poppendieck', number: '39-23-6423122' }
     ])
     const [newName, setNewName] = useState('')
     const [newNumber, setNewNumber] = useState('')
+    const [filter, setFilter] = useState('')
+    const [personsToShow, setPersonsToShow] = useState(persons)
 
     const handleNameSubmit = (event) => {
         event.preventDefault()
@@ -36,9 +41,17 @@ const App = () => {
         setNewNumber(event.target.value)
     }
 
+    const handleFilterTyping = (event) => {
+        setFilter(event.target.value)
+        setPersonsToShow(persons.filter(person => person.name.includes(filter)))
+        console.log(personsToShow)
+    }
+
     return (
         <div>
-            <h2>Phonebook</h2>
+            <h1>Phonebook</h1>
+            show names with <input onChange={handleFilterTyping} value={filter}/>
+            <h2>Add a new</h2>
             <form onSubmit={handleNameSubmit}>
                 <div>
                     name: <input onChange={handleNameTyping} value={newName}/>
@@ -52,7 +65,7 @@ const App = () => {
             </form>
             <h2>Numbers</h2>
             <ul>
-                {persons.map(person => 
+                {personsToShow.map(person => 
                     <li key={person.name}>{person.name}: {person.number}</li>
                 )}
             </ul>
