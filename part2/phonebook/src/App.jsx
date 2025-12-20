@@ -42,8 +42,9 @@ const App = () => {
     }
 
     const handleFilterTyping = (event) => {
-        setFilter(event.target.value)
-        setPersonsToShow(persons.filter(person => person.name.includes(filter)))
+        const value = event.target.value
+        setFilter(value)
+        setPersonsToShow(persons.filter(person => person.name.toLowerCase().includes(value.toLowerCase())))
         console.log(personsToShow)
     }
 
