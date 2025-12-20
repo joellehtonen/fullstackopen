@@ -9,6 +9,13 @@ const App = () => {
 
     const handleNameSubmit = (event) => {
         event.preventDefault()
+        console.log('newName', newName)
+        const existingName = persons.filter(person => person.name === newName)
+        console.log('existingName', existingName)
+        if (existingName.length > 0) {
+            alert(`${newName} is already in the phonebook`)
+            return
+        }
         const newPerson = {
             name: newName
         }
