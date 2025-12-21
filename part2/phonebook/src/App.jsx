@@ -12,7 +12,8 @@ const App = () => {
     const [newName, setNewName] = useState('')
     const [newNumber, setNewNumber] = useState('')
     const [filter, setFilter] = useState('')
-    const [personsToShow, setPersonsToShow] = useState(persons)
+
+    const personsToShow = persons.filter(person => person.name.toLowerCase().includes(filter.toLowerCase()))
 
     const handleNameSubmit = (event) => {
         event.preventDefault()
@@ -29,8 +30,7 @@ const App = () => {
             setFilter('')
             return
         }
-        setPersonsToShow(persons.concat(newPerson))
-        setPersons(persons.concat(newPerson))
+        setPersons(prev => prev.concat(newPerson))
         setNewName('')
         setNewNumber('')
         setFilter('')
@@ -49,7 +49,6 @@ const App = () => {
     const handleFilterTyping = (event) => {
         const value = event.target.value
         setFilter(value)
-        setPersonsToShow(persons.filter(person => person.name.toLowerCase().includes(value.toLowerCase())))
         console.log(personsToShow)
     }
 
