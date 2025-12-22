@@ -54,6 +54,16 @@
       "id": "5d3d",
       "content": "new note",
       "important": false
+    },
+    {
+      "id": "6c2d",
+      "content": "moi",
+      "important": true
+    },
+    {
+      "id": "e088",
+      "content": "jee",
+      "important": true
     }
   ]
 }
