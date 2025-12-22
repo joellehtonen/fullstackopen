@@ -38,10 +38,14 @@ const App = () => {
             setFilter('')
             return
         }
-        setPersons(prev => prev.concat(newPerson))
-        setNewName('')
-        setNewNumber('')
-        setFilter('')
+        axios
+            .post('http://localhost:3001/persons', newPerson)
+            .then(response => {
+                setPersons(prev => prev.concat(response.data))
+                setNewName('')
+                setNewNumber('')
+                setFilter('')
+            })
         console.log('PERSONS', persons)
     }
     
