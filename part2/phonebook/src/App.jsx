@@ -48,6 +48,17 @@ const App = () => {
             })
         console.log('PERSONS', persons)
     }
+
+    const handleDelete = (event) => {
+        console.log('event', event)
+        if (confirm(`Delete ${event.target.name} from phonebook?`)) {
+            personService
+                .erase(event.target.id)
+                .then(() => {
+                    setPersons(persons.filter(p => p.id !== event.target.id))
+                })
+        }
+    }
     
     const handleNameTyping = (event) => {
         setNewName(event.target.value)
@@ -71,7 +82,7 @@ const App = () => {
             <h2>Add a new</h2>
             <PersonForm onSubmit={handleNameSubmit} onNameChange={handleNameTyping} onNumberChange={handleNumberTyping} nameValue={newName} numberValue={newNumber}/>
             <h2>Numbers</h2>
-            <Persons personsToShow={personsToShow}/>
+            <Persons personsToShow={personsToShow} onClick={handleDelete}/>
         </div>
     )
 }
