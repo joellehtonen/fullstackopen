@@ -30,9 +30,17 @@ const App = () => {
             number: newNumber
         }
         console.log('newPerson', newPerson)
-        const existingName = persons.filter(person => person.name === newName)
-        if (existingName.length > 0) {
-            alert(`${newName} is already in the phonebook`)
+        const existing = persons.filter(person => person.name === newName)
+        if (existing.length > 0) {
+            if (confirm(`${newName} is already in the phonebook. Do you want to replace their number?`)) {
+                // console.log('existing', existing[0])
+                // console.log('ID', existing[0].id)
+                personService
+                    .update(existing[0].id, newPerson)
+                    .then(response => {
+                        setPersons(persons.map(p => p.name === existing[0].name ? response.data : p))
+                    })
+            }
             setNewName('')
             setNewNumber('')
             setFilter('')
