@@ -1,6 +1,5 @@
 import Note from './components/Note'
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import noteService from './services/notes'
 
 const App = () => {
@@ -11,7 +10,7 @@ const App = () => {
     useEffect(() => {
         console.log('effect')
         noteService
-            .getAll
+            .getAll()
             .then(response => {
                 console.log('promise fulfilled')
                 setNotes(response.data)
