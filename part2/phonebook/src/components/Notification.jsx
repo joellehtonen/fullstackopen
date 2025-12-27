@@ -1,6 +1,16 @@
-const Notification = ({ message }) => {
-    const notificationStyle = {
+const Notification = ({ message, error }) => {
+    const defaultStyle = {
         color: 'green',
+        fontSize: '20px',
+        borderStyle: 'solid',
+        borderRadius: 5,
+        padding: 10,
+        marginBottom: 10
+    }
+
+    const errorStyle = {
+        color: 'red',
+        fontStyle: 'bold',
         fontSize: '20px',
         borderStyle: 'solid',
         borderRadius: 5,
@@ -12,7 +22,7 @@ const Notification = ({ message }) => {
         return null
 
     return (
-        <div style={notificationStyle}>
+        <div style={error ? errorStyle : defaultStyle}>
             {message}
         </div>
     )

@@ -11,6 +11,7 @@ const App = () => {
     const [newNumber, setNewNumber] = useState('')
     const [filter, setFilter] = useState('')
     const [notificationMessage, setNotificationMessage] = useState(null)
+    const [error, setError] = useState(false)
 
     useEffect(() => {
         console.log('effect')
@@ -35,12 +36,20 @@ const App = () => {
         const existing = persons.filter(person => person.name === newName)
         if (existing.length > 0) {
             if (confirm(`${newName} is already in the phonebook. Do you want to replace their number?`)) {
-                // console.log('existing', existing[0])
-                // console.log('ID', existing[0].id)
                 personService
                     .update(existing[0].id, newPerson)
                     .then(response => {
                         setPersons(persons.map(p => p.name === existing[0].name ? response.data : p))
+                    })
+                    .catch(error => {
+                        console.log('IN ERROR')
+                        setError(true)
+                        setNotificationMessage(`${newPerson.name} has already been deleted`)
+                        setPersons(persons.filter(p => p.name !== newPerson.name))
+                        setTimeout(() => {
+                            setNotificationMessage(null)
+                            setError(false)
+                        }, 5000)
                     })
             }
             setNewName('')
@@ -68,6 +77,17 @@ const App = () => {
                 .erase(event.target.id)
                 .then(() => {
                     setPersons(persons.filter(p => p.id !== event.target.id))
+                    setNotificationMessage(`${event.target.name} deleted`)
+                    setTimeout(() => setNotificationMessage(null), 5000)
+                })
+                .catch(error => {
+                    setError(true)
+                    setNotificationMessage(`${event.target.name} has already been deleted`)
+                    setPersons(persons.filter(p => p.id !== event.target.id))
+                    setTimeout(() => {
+                        setNotificationMessage(null)
+                        setError(false)
+                    }, 5000)
                 })
         }
     }
@@ -90,7 +110,7 @@ const App = () => {
     return (
         <div>
             <h1>Phonebook</h1>
-            <Notification message={notificationMessage}/>
+            <Notification message={notificationMessage} error={error} />
             <Filter filter={filter} onChange={handleFilterTyping} />
             <h2>Add a new</h2>
             <PersonForm onSubmit={handleNameSubmit} onNameChange={handleNameTyping} onNumberChange={handleNumberTyping} nameValue={newName} numberValue={newNumber}/>
