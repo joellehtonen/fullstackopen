@@ -31,6 +31,7 @@ const Result = ({ value, countries }) => {
                     {results.map(country => 
                         <li key={country.name.common}>{country.name.common}</li>
                     )}
+                    <button>SHOW</button>
                 </ul>
         )}
         return

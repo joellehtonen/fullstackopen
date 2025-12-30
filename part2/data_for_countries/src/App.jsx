@@ -13,9 +13,9 @@ const App = () => {
             .then((response) => {
                 setCountries(response.data)
             })
-            .catch(
+            .catch(error => {
                 setError(true)
-            )
+            })
     }, [])
     // console.log('countries', countries)
 
