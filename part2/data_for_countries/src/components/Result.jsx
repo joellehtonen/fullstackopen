@@ -29,9 +29,13 @@ const Result = ({ value, countries }) => {
             return (
                 <ul>
                     {results.map(country => 
-                        <li key={country.name.common}>{country.name.common}</li>
+                        <div>
+                            <li key={country.name.common}>
+                                {country.name.common}
+                                <button>Show</button>
+                            </li>
+                        </div>
                     )}
-                    <button>SHOW</button>
                 </ul>
         )}
         return
