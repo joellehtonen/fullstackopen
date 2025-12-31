@@ -1,7 +1,19 @@
+import { useState, useEffect } from 'react'
+
 const Result = ({ value, countries }) => {
-    let results
+    const [results, setResults] = useState([])
+
+    useEffect(() => {
+        console.log('EFFECT')
+        setResults(countries.filter(country => country.name.common.toLowerCase().includes(value.toLowerCase())))
+    }, [value, countries])
+
+    const handleClick= (country) => {
+        console.log('CLICKED')
+        setResults(results.filter(c => c.name.common === country.name.common))
+    }
+
     if (value) {
-        results = countries.filter(country => country.name.common.toLowerCase().includes(value.toLowerCase()))
         console.log('RESULTS', results)
         if (results.length > 10) {
             return (
@@ -13,8 +25,10 @@ const Result = ({ value, countries }) => {
             return (
                 <div>
                     <h2>{results[0].name.common}</h2>
-                    <p>Capital: {results[0].capital[0]}</p>
-                    <p>Area: {results[0].area}</p>
+                    <p>Region: {results[0].subregion}</p>
+                    <p>Capital: {results[0].capital}</p>
+                    <p>Area: {results[0].area} km2</p>
+                    <p>Population: {results[0].population}</p>
                     <h3>Languages:</h3>
                     <ul>
                         {Object.entries(results[0].languages).map(([key, value]) => 
@@ -29,16 +43,15 @@ const Result = ({ value, countries }) => {
             return (
                 <ul>
                     {results.map(country => 
-                        <div>
-                            <li key={country.name.common}>
+                        <div key={country.name.common}>
+                            <li>
                                 {country.name.common}
-                                <button>Show</button>
+                                <button onClick={() => handleClick(country)}>Show</button>
                             </li>
                         </div>
                     )}
                 </ul>
         )}
-        return
     }
 
     return null
