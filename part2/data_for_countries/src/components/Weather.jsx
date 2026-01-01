@@ -29,8 +29,8 @@ const Weather = ({ city }) => {
     return (
         <div>
             <h3>Weather in {city}</h3>
-            <p>Temperature {Math.round((temp - 273.15) * 10) / 10} Celcius</p>
-            <p>{description}</p>
+            <p>Temperature: {Math.round((temp - 273.15) * 10) / 10} Celcius</p>
+            <p>Description: {description}</p>
             <img src={icon} />
         </div>
     )
