@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Weather from './Weather'
 
 const Result = ({ value, countries }) => {
     const [results, setResults] = useState([])
@@ -26,7 +27,7 @@ const Result = ({ value, countries }) => {
                 <div>
                     <h2>{results[0].name.common}</h2>
                     <p>Region: {results[0].subregion}</p>
-                    <p>Capital: {results[0].capital}</p>
+                    <p>Capital: {results[0].capital.length > 1 ? results[0].capital[0] : results[0].capital}</p>
                     <p>Area: {results[0].area} km2</p>
                     <p>Population: {results[0].population}</p>
                     <h3>Languages:</h3>
@@ -37,6 +38,7 @@ const Result = ({ value, countries }) => {
                             </li>)}
                     </ul>
                     <img src={results[0].flags.png} />
+                    <Weather city={results[0].capital.length > 1 ? results[0].capital[0] : results[0].capital} />
                 </div>
         )}
         else {
